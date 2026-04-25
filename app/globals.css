@@ -1,0 +1,196 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   SINGLE-FILE THEME  —  edit this block to rebrand the entire site.
+   Every color, font, radius, shadow and spacing token lives here.
+   Tailwind v4 auto-generates utilities from these tokens
+   (e.g. `--color-cream` → `bg-cream`, `text-cream`, `border-cream`, etc.)
+   ========================================================================== */
+@theme {
+  /* Brand colors */
+  --color-cream: #f5efe3;
+  --color-cream-2: #ede4d2;
+  --color-ink: #151310;
+  --color-ink-2: #2b2620;
+
+  /* Updated brand color (now orange but keeping variable names) */
+  --color-red: #f65f1a;
+  --color-red-deep: #c9470f;
+
+  /* Adjusted accents to match orange */
+  --color-saffron: #ff9b3d;
+  --color-mustard: #e67712;
+
+  /* Subtle border color */
+  --color-line: rgba(21, 19, 16, 0.14);
+
+  /* Fonts (the CSS variables are wired from next/font in app/layout.tsx) */
+  --font-display: var(--font-archivo), 'Archivo Black', ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-manrope), 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace;
+  --font-arabic: var(--font-amiri), 'Amiri', serif;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
+
+  /* Brand shadow */
+  --shadow-brand: 0 1px 0 rgba(21, 19, 16, 0.06), 0 10px 30px -12px rgba(21, 19, 16, 0.18);
+
+  /* Animations */
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float 6s ease-in-out -3s infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 5s ease-in-out infinite;
+  --animate-sway: sway 7s ease-in-out infinite;
+  --animate-spin-slow: spin 32s linear infinite;
+  --animate-fade-up: fade-up 0.8s ease-out both;
+}
+
+/* Keyframes for Tailwind v4 animations */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(12deg);
+  }
+  50% {
+    transform: rotate(8deg) translateY(-4px);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   Base layer — global resets. MUST live inside @layer base so that Tailwind
+   utility classes (which live in @layer utilities) can override them.
+   Without this, `a { color: inherit }` and `button { background: none }`
+   silently swallow `text-cream`, `bg-saffron`, etc. on those elements.
+   ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  /* RTL-aware font swap for Urdu */
+  [dir='rtl'] body {
+    font-family: var(--font-arabic), var(--font-body);
+  }
+  [dir='rtl'] .font-display {
+    font-family: var(--font-arabic), var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  /* Latin numbers / codes stay LTR inside RTL layout */
+  [dir='rtl'] .keep-ltr {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+  }
+
+  /* Ensure smooth-scroll anchors clear the sticky header */
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+}
+
+/* ==========================================================================
+   Components layer — custom typography helpers used across the site.
+   Lives below utilities so any explicit Tailwind color/size override wins.
+   ========================================================================== */
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .font-mono-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}

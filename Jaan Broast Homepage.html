@@ -1,0 +1,1152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Jaan Broast &amp; Biryani — Quetta's Favorite Spot for Broast, Biryani &amp; Fast Food</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<style>
+  :root {
+    --cream:      #F5EFE3;
+    --cream-2:    #EDE4D2;
+    --ink:        #151310;
+    --ink-2:      #2B2620;
+    --red:        #C8321E;
+    --red-deep:   #8A1D10;
+    --saffron:    #F4B83A;
+    --mustard:    #E58B20;
+    --line:       rgba(21,19,16,0.14);
+    --shadow:     0 1px 0 rgba(21,19,16,0.06), 0 10px 30px -12px rgba(21,19,16,0.18);
+
+    /* density scale, overridden via data-density on <html> */
+    --sp:         1;
+    --sec-pad:    calc(80px * var(--sp));
+    --gap:        calc(16px * var(--sp));
+  }
+  html[data-density="compact"] { --sp: 0.75; }
+  html[data-density="comfy"]   { --sp: 1.25; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Manrope", system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  html[data-lang="ur"] body { font-family: "Amiri", "Manrope", serif; }
+  html[data-lang="ur"] .display { font-family: "Amiri", "Archivo Black", serif; font-weight: 700; letter-spacing: 0; }
+  html[data-lang="ur"] { direction: rtl; }
+  html[data-lang="ur"] .mono,
+  html[data-lang="ur"] .sec-num,
+  html[data-lang="ur"] .kicker,
+  html[data-lang="ur"] .tag,
+  html[data-lang="ur"] .ribbon,
+  html[data-lang="ur"] .num,
+  html[data-lang="ur"] .phone-list a,
+  html[data-lang="ur"] .brand small { direction: ltr; unicode-bidi: isolate; }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  .display {
+    font-family: "Archivo Black", "Manrope", sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* -------- NAV -------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--cream);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: "Archivo Black", sans-serif;
+    letter-spacing: -0.02em;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  .brand-mark {
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    overflow: visible;
+    flex-shrink: 0;
+  }
+  .brand-mark img { width: 100%; height: 100%; object-fit: contain; display: block; filter: drop-shadow(0 2px 6px rgba(21,19,16,0.18)); }
+  .brand-mark.foot {
+    width: 120px; height: 120px;
+    margin-bottom: 12px;
+  }
+  .brand-mark.foot img { filter: drop-shadow(0 4px 14px rgba(0,0,0,0.5)); }
+  .brand small {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--ink-2);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+  .nav-links {
+    display: none;
+    gap: 28px;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { display: flex; align-items: center; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    transition: transform .15s ease, background .15s ease, color .15s ease;
+    border: 1.5px solid transparent;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--red); color: var(--cream); }
+  .btn-primary:hover { background: var(--red-deep); }
+  .btn-dark    { background: var(--ink); color: var(--cream); }
+  .btn-ghost   { background: transparent; border-color: var(--ink); color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+  .btn-saffron { background: var(--saffron); color: var(--ink); }
+  .btn-saffron:hover { background: var(--mustard); color: var(--ink); }
+  .btn-lg { padding: 16px 24px; font-size: 15px; }
+
+  .menu-toggle {
+    display: grid; place-items: center;
+    width: 44px; height: 44px;
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+  }
+  .menu-toggle span { display: block; width: 18px; height: 2px; background: var(--ink); position: relative; }
+  .menu-toggle span::before, .menu-toggle span::after {
+    content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: var(--ink);
+  }
+  .menu-toggle span::before { top: -6px; }
+  .menu-toggle span::after  { top:  6px; }
+
+  .mobile-drawer { display: none; padding: 12px 24px 24px; border-bottom: 1px solid var(--line); background: var(--cream); }
+  .mobile-drawer.open { display: block; }
+  .mobile-drawer a { display: block; padding: 12px 0; font-weight: 700; border-bottom: 1px solid var(--line); }
+  .mobile-drawer a:last-of-type { border-bottom: none; }
+
+  /* -------- HERO -------- */
+  .hero { padding: calc(40px * var(--sp)) 0 calc(60px * var(--sp)); position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 14px;
+    background: var(--ink);
+    color: var(--saffron);
+    border-radius: 999px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: #33d17a; box-shadow: 0 0 0 3px rgba(51,209,122,0.25); }
+  .hero h1 { font-size: clamp(44px, 9vw, 112px); margin: 0 0 20px; }
+  .hero h1 .red { color: var(--red); }
+  .hero h1 .underline { display: inline-block; position: relative; }
+  .hero h1 .underline::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 6%;
+    height: 0.22em; background: var(--saffron); z-index: -1;
+  }
+  .hero p.lead { font-size: clamp(16px, 2.2vw, 19px); max-width: 560px; color: var(--ink-2); margin: 0 0 28px; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+  .trust-line { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+  .trust-line span { display: inline-flex; align-items: center; gap: 8px; }
+  .trust-line span::before { content: ""; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+  .hero-visual { position: relative; aspect-ratio: 1 / 1; max-width: 560px; margin-left: auto; }
+  .plate { position: absolute; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); background: var(--ink); }
+  .plate-big   { inset: 0 0 22% 18%; transform: rotate(-3deg); }
+  .plate-mid   { inset: 14% 32% 28% 0; transform: rotate(4deg); }
+  .plate-small { inset: 54% 4% 0 48%; transform: rotate(-2deg); }
+  .plate img { width: 100%; height: 100%; object-fit: cover; }
+  .stamp {
+    position: absolute; z-index: 2;
+    right: -6px; top: -6px;
+    width: 108px; height: 108px;
+    background: var(--saffron);
+    color: var(--ink);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    text-align: center;
+    font-family: "Archivo Black", sans-serif;
+    line-height: 1; padding: 10px;
+    transform: rotate(12deg);
+    box-shadow: 0 10px 24px -8px rgba(21,19,16,0.35);
+  }
+  .stamp .big { font-size: 30px; }
+  .stamp .small { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 4px; font-family: "JetBrains Mono", monospace; font-weight: 500; }
+
+  .marquee { overflow: hidden; background: var(--ink); color: var(--cream); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .marquee-track {
+    display: flex; gap: 48px; padding: 16px 0; white-space: nowrap;
+    animation: marquee 40s linear infinite;
+    font-family: "Archivo Black", sans-serif; font-size: 22px; text-transform: uppercase; letter-spacing: 0.02em;
+  }
+  .marquee-track span { display: inline-flex; align-items: center; gap: 48px; }
+  .marquee-track .sep { color: var(--saffron); }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* -------- SECTION BASE -------- */
+  section { padding: var(--sec-pad) 0; }
+  .sec-head { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 40px; }
+  .sec-num { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.16em; color: var(--red); text-transform: uppercase; }
+  .sec-title { font-size: clamp(32px, 5.5vw, 64px); margin: 0; }
+  .sec-sub { max-width: 560px; color: var(--ink-2); margin-top: 8px; font-size: 16px; }
+
+  /* -------- CATEGORIES -------- */
+  .cats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .cat {
+    position: relative; border-radius: 20px; padding: 18px; aspect-ratio: 4 / 5;
+    background: var(--cream-2); overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: transform .2s ease; border: 1px solid var(--line);
+  }
+  .cat:hover { transform: translateY(-4px); }
+  .cat .tag {
+    align-self: flex-start;
+    font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--ink); color: var(--cream);
+    padding: 6px 10px; border-radius: 999px; z-index: 2; position: relative;
+  }
+  .cat-img { position: absolute; inset: 30% 8% 28% 8%; border-radius: 16px; overflow: hidden; background: var(--ink); }
+  .cat-img img { width: 100%; height: 100%; object-fit: cover; }
+  .cat-name { font-family: "Archivo Black", sans-serif; font-size: 20px; text-transform: uppercase; line-height: 1; margin: 0; }
+  .cat-desc { font-size: 12px; color: var(--ink-2); margin-top: 4px; line-height: 1.4; }
+  .cat-foot { position: relative; z-index: 1; }
+  .cat.red { background: var(--red); color: var(--cream); }
+  .cat.red .cat-desc { color: rgba(245,239,227,0.8); }
+  .cat.red .tag      { background: var(--saffron); color: var(--ink); }
+  .cat.ink { background: var(--ink); color: var(--cream); }
+  .cat.ink .cat-desc { color: rgba(245,239,227,0.7); }
+  .cat.saff { background: var(--saffron); }
+
+  /* -------- SIGNATURE DISHES -------- */
+  .dishes { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .dish {
+    display: grid; grid-template-columns: 112px 1fr auto; gap: 16px;
+    padding: 16px; border: 1px solid var(--line); border-radius: 20px;
+    background: #FBF6EB; align-items: center; transition: all .2s ease;
+  }
+  .dish:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .dish:hover .dish-desc { color: rgba(245,239,227,0.75); }
+  .dish:hover .dish-meta { color: var(--saffron); }
+  .dish:hover .dish-cta  { background: var(--saffron); color: var(--ink); }
+  .dish-img { width: 112px; height: 112px; border-radius: 16px; overflow: hidden; background: var(--red); }
+  .dish-img img { width: 100%; height: 100%; object-fit: cover; }
+  .dish-body h3 { font-family: "Archivo Black", sans-serif; font-size: 20px; text-transform: uppercase; margin: 0 0 4px; line-height: 1.05; }
+  .dish-desc { font-size: 13px; color: var(--ink-2); margin: 0 0 6px; }
+  .dish-meta { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); }
+  .dish-cta { width: 44px; height: 44px; border-radius: 50%; background: var(--saffron); color: var(--ink); display: grid; place-items: center; font-family: "Archivo Black", sans-serif; }
+
+  /* -------- WHY CHOOSE -------- */
+  .why { background: var(--ink); color: var(--cream); }
+  .why .sec-num { color: var(--saffron); }
+  .why .sec-sub { color: rgba(245,239,227,0.7); }
+  .why-grid { display: grid; grid-template-columns: 1fr; gap: 2px; background: rgba(245,239,227,0.12); border: 1px solid rgba(245,239,227,0.12); border-radius: 20px; overflow: hidden; }
+  .why-card { background: var(--ink); padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; min-height: 200px; }
+  .why-num { font-family: "Archivo Black", sans-serif; color: var(--saffron); font-size: 40px; line-height: 1; }
+  .why-card h4 { font-family: "Archivo Black", sans-serif; font-size: 20px; text-transform: uppercase; margin: 0; line-height: 1.1; }
+  .why-card p { margin: 0; font-size: 14px; color: rgba(245,239,227,0.75); }
+
+  /* -------- ORDER -------- */
+  .order-wrap { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  .order-card {
+    border-radius: 24px; padding: 28px; border: 1px solid var(--line);
+    background: #FBF6EB;
+    display: flex; flex-direction: column; gap: 16px;
+    min-height: 240px; justify-content: space-between;
+    transition: transform .2s ease;
+  }
+  .order-card:hover { transform: translateY(-4px); }
+  .order-card.red  { background: var(--red);     color: var(--cream); border-color: var(--red); }
+  .order-card.ink  { background: var(--ink);     color: var(--cream); border-color: var(--ink); }
+  .order-card.saff { background: var(--saffron); color: var(--ink);   border-color: var(--saffron); }
+  .order-card .kicker { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.8; }
+  .order-card h3 { font-family: "Archivo Black", sans-serif; font-size: 28px; margin: 0; line-height: 1; text-transform: uppercase; }
+  .order-card p { margin: 0; font-size: 14px; opacity: 0.85; }
+  .order-card .btn { align-self: flex-start; background: var(--cream); color: var(--ink); }
+  .order-card.saff .btn { background: var(--ink); color: var(--cream); }
+  .order-card.red  .btn { background: var(--cream); color: var(--ink); }
+  .order-card.ink  .btn { background: var(--saffron); color: var(--ink); }
+
+  /* -------- MENU PREVIEW -------- */
+  .menu-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; }
+  .menu-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .chip { padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--ink); font-size: 12px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; transition: all .15s ease; font-family: "JetBrains Mono", monospace; }
+  .chip:hover { background: var(--ink); color: var(--cream); }
+  .chip.active { background: var(--red); color: var(--cream); border-color: var(--red); }
+  .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .menu-item { border: 1px solid var(--line); padding: 16px; border-radius: 16px; background: var(--cream-2); display: flex; flex-direction: column; gap: 6px; min-height: 120px; justify-content: space-between; transition: all .15s ease; }
+  .menu-item:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+  .menu-item .num { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.12em; opacity: 0.5; }
+  .menu-item h4 { font-family: "Archivo Black", sans-serif; margin: 0; font-size: 16px; line-height: 1.1; text-transform: uppercase; }
+  .menu-item p { font-size: 12px; margin: 0; opacity: 0.75; }
+
+  /* -------- OFFERS -------- */
+  .offers { background: var(--red); color: var(--cream); }
+  .offers .sec-num { color: var(--saffron); }
+  .offers .sec-sub { color: rgba(245,239,227,0.85); }
+  .offer-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .offer { background: var(--cream); color: var(--ink); border-radius: 20px; padding: 0; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  .offer-img { aspect-ratio: 16 / 9; overflow: hidden; background: var(--ink); }
+  .offer-img img { width: 100%; height: 100%; object-fit: cover; }
+  .offer-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .offer .ribbon { position: absolute; top: 14px; right: 14px; background: var(--ink); color: var(--saffron); font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; z-index: 2; }
+  .offer h4 { font-family: "Archivo Black", sans-serif; font-size: 22px; margin: 0; line-height: 1; text-transform: uppercase; }
+  .offer .price { font-family: "Archivo Black", sans-serif; font-size: 28px; color: var(--red); }
+  .offer .price small { font-size: 13px; color: var(--ink-2); font-family: "JetBrains Mono", monospace; font-weight: 500; }
+  .offer p { margin: 0; font-size: 13px; color: var(--ink-2); }
+  .offer .btn { align-self: flex-start; background: var(--ink); color: var(--cream); margin-top: 4px; }
+  .offer.feat { background: var(--ink); color: var(--cream); }
+  .offer.feat .price { color: var(--saffron); }
+  .offer.feat p { color: rgba(245,239,227,0.8); }
+  .offer.feat .ribbon { background: var(--saffron); color: var(--ink); }
+  .offer.feat .btn { background: var(--saffron); color: var(--ink); }
+
+  /* -------- REVIEWS -------- */
+  .reviews-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .review { border: 1px solid var(--line); background: #FBF6EB; padding: 24px; border-radius: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .review .stars { color: var(--mustard); font-size: 16px; letter-spacing: 2px; }
+  .review blockquote { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; text-wrap: pretty; }
+  .review .byline { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-2); }
+  .review .avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--red); color: var(--cream); display: grid; place-items: center; font-family: "Archivo Black", sans-serif; font-size: 14px; }
+  .review.dark { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .review.dark .byline { color: rgba(245,239,227,0.7); }
+
+  /* -------- LOCATION -------- */
+  .loc { background: var(--ink); color: var(--cream); }
+  .loc .sec-num { color: var(--saffron); }
+  .loc-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  .map { aspect-ratio: 4 / 3; border-radius: 20px; background: linear-gradient(rgba(200,50,30,0.22), rgba(200,50,30,0.22)), repeating-linear-gradient(0deg, rgba(245,239,227,0.08) 0 1px, transparent 1px 40px), repeating-linear-gradient(90deg, rgba(245,239,227,0.08) 0 1px, transparent 1px 40px), #1E1A15; position: relative; overflow: hidden; border: 1px solid rgba(245,239,227,0.14); }
+  .pin { position: absolute; top: 48%; left: 50%; width: 44px; height: 44px; border-radius: 50% 50% 50% 0; background: var(--red); transform: translate(-50%, -100%) rotate(-45deg); box-shadow: 0 10px 24px rgba(0,0,0,0.4); }
+  .pin::after { content: ""; position: absolute; inset: 10px; background: var(--saffron); border-radius: 50%; }
+  .map-chip { position: absolute; bottom: 16px; left: 16px; background: var(--cream); color: var(--ink); padding: 10px 14px; border-radius: 12px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+  .loc-info { display: flex; flex-direction: column; gap: 20px; }
+  .loc-row { display: flex; flex-direction: column; gap: 4px; padding-bottom: 18px; border-bottom: 1px solid rgba(245,239,227,0.12); }
+  .loc-row .label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--saffron); }
+  .loc-row .value { font-family: "Archivo Black", sans-serif; font-size: 22px; text-transform: uppercase; line-height: 1.1; }
+  .phone-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .phone-list a { font-family: "JetBrains Mono", monospace; font-size: 13px; padding: 10px 12px; background: rgba(245,239,227,0.06); border-radius: 10px; font-weight: 600; text-align: left; transition: background .15s ease; }
+  .phone-list a:hover { background: var(--saffron); color: var(--ink); }
+  .loc-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+  /* -------- FOOTER -------- */
+  footer { background: #0B0A08; color: var(--cream); padding: 60px 0 24px; }
+  .foot-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 40px; }
+  .foot-brand h3 { font-family: "Archivo Black", sans-serif; font-size: 40px; text-transform: uppercase; margin: 12px 0 10px; line-height: 0.95; }
+  .foot-brand h3 .red { color: var(--red); }
+  .foot-brand p { color: rgba(245,239,227,0.65); font-size: 14px; max-width: 360px; margin: 0; }
+  .foot-col h5 { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--saffron); margin: 0 0 14px; }
+  .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+  .foot-col ul a:hover { color: var(--saffron); }
+  .foot-bottom { border-top: 1px solid rgba(245,239,227,0.1); padding-top: 20px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,239,227,0.5); }
+
+  /* -------- RESPONSIVE -------- */
+  @media (min-width: 560px) {
+    .cats { grid-template-columns: repeat(3, 1fr); }
+    .menu-grid { grid-template-columns: repeat(3, 1fr); }
+    .phone-list { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 760px) {
+    section { padding: calc(100px * var(--sp)) 0; }
+    .cats { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .dishes { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .order-wrap { grid-template-columns: repeat(2, 1fr); }
+    .offer-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    .loc-grid { grid-template-columns: 1.2fr 1fr; align-items: start; }
+    .menu-grid { grid-template-columns: repeat(4, 1fr); }
+    .foot-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+    .foot-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
+  }
+  @media (min-width: 960px) {
+    .nav-links { display: flex; }
+    .menu-toggle { display: none; }
+    .hero-grid { grid-template-columns: 1.1fr 1fr; gap: 48px; }
+    .hero { padding: calc(72px * var(--sp)) 0 calc(100px * var(--sp)); }
+    .cats { grid-template-columns: repeat(4, 1fr); }
+    .why-grid { grid-template-columns: repeat(3, 1fr); }
+    .order-wrap { grid-template-columns: repeat(4, 1fr); }
+    .offer-grid { grid-template-columns: repeat(3, 1fr); }
+    .reviews-grid { grid-template-columns: repeat(4, 1fr); }
+    .menu-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .hero-visual { margin-top: 16px; }
+    .stamp { width: 86px; height: 86px; }
+    .stamp .big { font-size: 22px; }
+    .marquee-track { font-size: 18px; gap: 32px; }
+    .dish { grid-template-columns: 80px 1fr; }
+    .dish-img { width: 80px; height: 80px; }
+    .dish-cta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark"><img src="logo.png" alt="Jaan Broast logo" /></span>
+      <span>
+        <span data-i18n="brand">Jaan Broast</span>
+        <small>EST. QUETTA · PRINCE RD</small>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="#menu" data-i18n="nav.menu">Menu</a>
+      <a href="#offers" data-i18n="nav.deals">Deals</a>
+      <a href="#categories" data-i18n="nav.categories">Categories</a>
+      <a href="#signature" data-i18n="nav.favorites">Favorites</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#order" class="btn btn-primary" data-i18n="nav.order">Order Now</a>
+      <button class="menu-toggle" aria-label="Menu" onclick="document.getElementById('drawer').classList.toggle('open')"><span></span></button>
+    </div>
+  </div>
+  <div id="drawer" class="mobile-drawer">
+    <a href="#menu" data-i18n="nav.menu">Menu</a>
+    <a href="#offers" data-i18n="nav.deals">Deals</a>
+    <a href="#categories" data-i18n="nav.categories">Categories</a>
+    <a href="#signature" data-i18n="nav.favorites">Favorites</a>
+    <a href="tel:081-2669900">Call · 081-2669900</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-tag">
+        <span class="dot"></span>
+        <span data-i18n="hero.status">Open now · Dine-in · Takeaway · Delivery</span>
+      </div>
+      <h1 class="display">
+        <span data-i18n="hero.h1a">Quetta's favorite spot for</span> <span class="red" data-i18n="hero.h1b">Broast</span>, <span class="underline" data-i18n="hero.h1c">Biryani</span> <span data-i18n="hero.h1d">&amp; Fast Food.</span>
+      </h1>
+      <p class="lead" data-i18n="hero.lead">
+        Crispy chicken broast, spicy biryani, smoky BBQ, juicy burgers, cheesy pizzas, shawarma, Chinese, Pakistani food, and fresh nashta — all your cravings in one place.
+      </p>
+      <div class="hero-ctas">
+        <a href="#order" class="btn btn-primary btn-lg" data-i18n="hero.cta.order">Order Now →</a>
+        <a href="#menu" class="btn btn-ghost btn-lg" data-i18n="hero.cta.menu">View Menu</a>
+        <a href="tel:081-2669900" class="btn btn-dark btn-lg" data-i18n="hero.cta.call">Call Now</a>
+      </div>
+      <div class="trust-line">
+        <span data-i18n="trust.fresh">Fresh Taste</span>
+        <span data-i18n="trust.fast">Fast Delivery</span>
+        <span data-i18n="trust.dine">Dine-In</span>
+        <span data-i18n="trust.take">Takeaway</span>
+        <span data-i18n="trust.family">Family Friendly</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="stamp">
+        <div>
+          <div class="big">7×7</div>
+          <div class="small" data-i18n="stamp">Daily Deals</div>
+        </div>
+      </div>
+      <div class="plate plate-big">
+        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=900&q=80&auto=format&fit=crop" alt="Crispy fried chicken platter" loading="lazy" />
+      </div>
+      <div class="plate plate-mid">
+        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=700&q=80&auto=format&fit=crop" alt="Chicken biryani" loading="lazy" />
+      </div>
+      <div class="plate plate-small">
+        <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=500&q=80&auto=format&fit=crop" alt="Golden french fries" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>★ BROAST</span><span class="sep">•</span>
+    <span>★ BIRYANI</span><span class="sep">•</span>
+    <span>★ BBQ</span><span class="sep">•</span>
+    <span>★ BURGERS</span><span class="sep">•</span>
+    <span>★ PIZZA</span><span class="sep">•</span>
+    <span>★ SHAWARMA</span><span class="sep">•</span>
+    <span>★ CHINESE</span><span class="sep">•</span>
+    <span>★ HANDI</span><span class="sep">•</span>
+    <span>★ NASHTA</span><span class="sep">•</span>
+    <span>★ BROAST</span><span class="sep">•</span>
+    <span>★ BIRYANI</span><span class="sep">•</span>
+    <span>★ BBQ</span><span class="sep">•</span>
+    <span>★ BURGERS</span><span class="sep">•</span>
+    <span>★ PIZZA</span><span class="sep">•</span>
+    <span>★ SHAWARMA</span><span class="sep">•</span>
+    <span>★ CHINESE</span><span class="sep">•</span>
+    <span>★ HANDI</span><span class="sep">•</span>
+    <span>★ NASHTA</span><span class="sep">•</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">02 / <span data-i18n="cat.kicker">Categories</span></span>
+      <h2 class="sec-title display" data-i18n="cat.title">All your cravings, one place.</h2>
+      <p class="sec-sub" data-i18n="cat.sub">From crispy broast to flavorful biryani, every category on our menu is built for real appetite — choose your craving and order in two taps.</p>
+    </div>
+    <div class="cats">
+      <a href="#menu" class="cat red">
+        <span class="tag" data-i18n="cat.1.tag">Signature</span>
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600&q=80&auto=format&fit=crop" alt="Broast" loading="lazy"/></div>
+        <div class="cat-foot">
+          <h3 class="cat-name" data-i18n="cat.1.name">Chicken Broast</h3>
+          <p class="cat-desc" data-i18n="cat.1.desc">Crispy outside, juicy inside — the one Quetta comes back for.</p>
+        </div>
+      </a>
+      <a href="#menu" class="cat">
+        <span class="tag" data-i18n="cat.2.tag">Best Seller</span>
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=80&auto=format&fit=crop" alt="Biryani" loading="lazy"/></div>
+        <div class="cat-foot">
+          <h3 class="cat-name" data-i18n="cat.2.name">Chicken Biryani</h3>
+          <p class="cat-desc" data-i18n="cat.2.desc">Aromatic, spicy, rich masala — built for lunch, dinner, family orders.</p>
+        </div>
+      </a>
+      <a href="#menu" class="cat ink">
+        <span class="tag" data-i18n="cat.3.tag">Fresh Grill</span>
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80&auto=format&fit=crop" alt="BBQ" loading="lazy"/></div>
+        <div class="cat-foot">
+          <h3 class="cat-name" data-i18n="cat.3.name">Bar-B-Q</h3>
+          <p class="cat-desc" data-i18n="cat.3.desc">Smoky, tender, grilled to order — desi flavor, done right.</p>
+        </div>
+      </a>
+      <a href="#menu" class="cat saff">
+        <span class="tag" data-i18n="cat.4.tag">Quick Craving</span>
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80&auto=format&fit=crop" alt="Burger" loading="lazy"/></div>
+        <div class="cat-foot">
+          <h3 class="cat-name" data-i18n="cat.4.name">Burgers &amp; Zingers</h3>
+          <p class="cat-desc" data-i18n="cat.4.desc">Loaded, saucy, satisfying — for big appetite and quick cravings.</p>
+        </div>
+      </a>
+      <a href="#menu" class="cat">
+        <span class="tag" data-i18n="cat.5.tag">Share Size</span>
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format&fit=crop" alt="Pizza" loading="lazy"/></div>
+        <div class="cat-foot">
+          <h3 class="cat-name" data-i18n="cat.5.name">Pizza &amp; Loaded Fries</h3>
+          <p class="cat-desc" data-i18n="cat.5.desc">Cheesy, hot, loaded — late-night orders, family nights, all good.</p>
+        </div>
+      </a>
+      <a href="#menu" class="cat red">
+        <span class="tag" data-i18n="cat.6.tag">Wraps</span>
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600&q=80&auto=format&fit=crop" alt="Shawarma" loading="lazy"/></div>
+        <div class="cat-foot">
+          <h3 class="cat-name" data-i18n="cat.6.name">Shawarma &amp; Rolls</h3>
+          <p class="cat-desc" data-i18n="cat.6.desc">Saucy, filling, easy to enjoy anywhere in Quetta.</p>
+        </div>
+      </a>
+      <a href="#menu" class="cat ink">
+        <span class="tag" data-i18n="cat.7.tag">Wok Style</span>
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&q=80&auto=format&fit=crop" alt="Chinese" loading="lazy"/></div>
+        <div class="cat-foot">
+          <h3 class="cat-name" data-i18n="cat.7.name">Chinese Food</h3>
+          <p class="cat-desc" data-i18n="cat.7.desc">Flavorful wok-style meals for Chinese food lovers.</p>
+        </div>
+      </a>
+      <a href="#menu" class="cat saff">
+        <span class="tag" data-i18n="cat.8.tag">Morning</span>
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&q=80&auto=format&fit=crop" alt="Nashta" loading="lazy"/></div>
+        <div class="cat-foot">
+          <h3 class="cat-name" data-i18n="cat.8.name">Nashta</h3>
+          <p class="cat-desc" data-i18n="cat.8.desc">Start your day fresh — breakfast classics from the Jaan Broast kitchen.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE DISHES -->
+<section id="signature" style="background: var(--cream-2);">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">03 / <span data-i18n="sig.kicker">Customer Favorites</span></span>
+      <h2 class="sec-title display" data-i18n="sig.title">Taste that makes you come back.</h2>
+      <p class="sec-sub" data-i18n="sig.sub">Fresh, flavorful, and made for every mood — explore the most-loved dishes from our kitchen.</p>
+    </div>
+    <div class="dishes">
+      <a href="#order" class="dish">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1513185041617-8ab03f83d6c5?w=400&q=80&auto=format&fit=crop" alt="Broast" loading="lazy"/></div>
+        <div class="dish-body">
+          <h3 data-i18n="sig.1.name">Crispy Chicken Broast</h3>
+          <p class="dish-desc" data-i18n="sig.1.desc">Golden, crunchy, and served hot with fries, sauce, and the flavor Jaan is known for.</p>
+          <span class="dish-meta">★ <span data-i18n="sig.1.meta">Signature · Rs. 650</span></span>
+        </div>
+        <div class="dish-cta">+</div>
+      </a>
+      <a href="#order" class="dish">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&q=80&auto=format&fit=crop" alt="Biryani" loading="lazy"/></div>
+        <div class="dish-body">
+          <h3 data-i18n="sig.2.name">Chicken Biryani</h3>
+          <p class="dish-desc" data-i18n="sig.2.desc">A spicy, satisfying classic — fragrant rice, tender chicken, rich masala.</p>
+          <span class="dish-meta">★ <span data-i18n="sig.2.meta">Best Seller · Rs. 380</span></span>
+        </div>
+        <div class="dish-cta">+</div>
+      </a>
+      <a href="#order" class="dish">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&q=80&auto=format&fit=crop" alt="Chargha" loading="lazy"/></div>
+        <div class="dish-body">
+          <h3 data-i18n="sig.3.name">Arabic Chargha</h3>
+          <p class="dish-desc" data-i18n="sig.3.desc">A flavorful favorite for customers who love tender chicken with bold seasoning.</p>
+          <span class="dish-meta">★ <span data-i18n="sig.3.meta">Highly Recommended · Rs. 1,250</span></span>
+        </div>
+        <div class="dish-cta">+</div>
+      </a>
+      <a href="#order" class="dish">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?w=400&q=80&auto=format&fit=crop" alt="Loaded fries" loading="lazy"/></div>
+        <div class="dish-body">
+          <h3 data-i18n="sig.4.name">Loaded Fries</h3>
+          <p class="dish-desc" data-i18n="sig.4.desc">Crispy fries topped with sauces and flavors that make every bite addictive.</p>
+          <span class="dish-meta">★ <span data-i18n="sig.4.meta">Crowd Favorite · Rs. 420</span></span>
+        </div>
+        <div class="dish-cta">+</div>
+      </a>
+      <a href="#order" class="dish">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80&auto=format&fit=crop" alt="Pizza" loading="lazy"/></div>
+        <div class="dish-body">
+          <h3 data-i18n="sig.5.name">Chicken Tikka Pizza</h3>
+          <p class="dish-desc" data-i18n="sig.5.desc">Hot, cheesy, and topped with desi-style chicken tikka flavor.</p>
+          <span class="dish-meta">★ <span data-i18n="sig.5.meta">Popular · Rs. 950</span></span>
+        </div>
+        <div class="dish-cta">+</div>
+      </a>
+      <a href="#order" class="dish">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80&auto=format&fit=crop" alt="BBQ" loading="lazy"/></div>
+        <div class="dish-body">
+          <h3 data-i18n="sig.6.name">BBQ Platter</h3>
+          <p class="dish-desc" data-i18n="sig.6.desc">Freshly grilled items made for family dinners, gatherings, and desi food lovers.</p>
+          <span class="dish-meta">★ <span data-i18n="sig.6.meta">Family Size · Rs. 1,850</span></span>
+        </div>
+        <div class="dish-cta">+</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">04 / <span data-i18n="why.kicker">Why Jaan Broast</span></span>
+      <h2 class="sec-title display" data-i18n="why.title">Why Quetta loves Jaan Broast &amp; Biryani.</h2>
+      <p class="sec-sub" data-i18n="why.sub">Built around fast service, fresh preparation, and a menu wide enough to feed every craving in one stop.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-num">01</div><h4 data-i18n="why.1.t">Wide Menu Variety</h4><p data-i18n="why.1.d">Broast, biryani, BBQ, burgers, pizza, shawarma, Chinese, Pakistani food, fish, haleem, handi, soup, and more.</p></div>
+      <div class="why-card"><div class="why-num">02</div><h4 data-i18n="why.2.t">Fast Ordering</h4><p data-i18n="why.2.d">Order through phone, website, app, WhatsApp, or your favorite delivery platform — whichever is easiest.</p></div>
+      <div class="why-card"><div class="why-num">03</div><h4 data-i18n="why.3.t">Fresh &amp; Hot Food</h4><p data-i18n="why.3.d">Every order is built around fast service, fresh preparation, and satisfying portions — no shortcuts.</p></div>
+      <div class="why-card"><div class="why-num">04</div><h4 data-i18n="why.4.t">Family-Friendly Dining</h4><p data-i18n="why.4.d">A suitable choice for families, students, workers, business meetups, and casual dining alike.</p></div>
+      <div class="why-card"><div class="why-num">05</div><h4 data-i18n="why.5.t">App-Based Convenience</h4><p data-i18n="why.5.d">Fast ordering, flexible payments, meal customization, live order tracking, and app-exclusive deals.</p></div>
+      <div class="why-card"><div class="why-num">06</div><h4 data-i18n="why.6.t">Strong Local Presence</h4><p data-i18n="why.6.d">Located on Prince Road, Quetta — multiple contact numbers and an active social presence.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section id="order">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">05 / <span data-i18n="ord.kicker">Order in a Few Taps</span></span>
+      <h2 class="sec-title display" data-i18n="ord.title">Hungry? Order now.</h2>
+      <p class="sec-sub" data-i18n="ord.sub">Pick your channel — website, app, WhatsApp, or Foodpanda. Hot food, your way.</p>
+    </div>
+    <div class="order-wrap">
+      <div class="order-card red">
+        <span class="kicker">01 · Fastest</span>
+        <div><h3 data-i18n="ord.1.t">Order Online</h3><p data-i18n="ord.1.d">Browse the full menu, customize your meal, and check out in under a minute.</p></div>
+        <a href="#menu" class="btn" data-i18n="ord.1.c">Start Order →</a>
+      </div>
+      <div class="order-card ink">
+        <span class="kicker">02 · App Exclusive</span>
+        <div><h3 data-i18n="ord.2.t">Download App</h3><p data-i18n="ord.2.d">Live order tracking, faster re-orders, and app-only discounts on every category.</p></div>
+        <a href="#" class="btn" data-i18n="ord.2.c">Get the App</a>
+      </div>
+      <div class="order-card saff">
+        <span class="kicker">03 · Quickest</span>
+        <div><h3 data-i18n="ord.3.t">WhatsApp Us</h3><p data-i18n="ord.3.d">Send your order on WhatsApp — confirm, pay cash, and we'll dispatch.</p></div>
+        <a href="https://wa.me/923111786550" class="btn" data-i18n="ord.3.c">Chat on WhatsApp</a>
+      </div>
+      <div class="order-card">
+        <span class="kicker">04 · Classic</span>
+        <div><h3 data-i18n="ord.4.t">Call for Delivery</h3><p data-i18n="ord.4.d">Prefer a phone call? Our kitchen line is open for direct orders.</p></div>
+        <a href="tel:081-2669900" class="btn">Call 081-2669900</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU PREVIEW -->
+<section id="menu" style="background: var(--cream-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="container">
+    <div class="menu-head">
+      <div class="sec-head" style="margin-bottom:0;">
+        <span class="sec-num">06 / <span data-i18n="mnu.kicker">Menu Preview</span></span>
+        <h2 class="sec-title display" data-i18n="mnu.title">Explore the Jaan menu.</h2>
+        <p class="sec-sub" data-i18n="mnu.sub">From desi classics to fast-food favorites, our menu is made for every craving.</p>
+      </div>
+      <a href="#" class="btn btn-dark" data-i18n="mnu.cta">Full Menu →</a>
+    </div>
+    <div class="menu-filters" id="filters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="popular">Popular</button>
+      <button class="chip" data-filter="spicy">Spicy</button>
+      <button class="chip" data-filter="family">Family Deal</button>
+      <button class="chip" data-filter="new">New Arrival</button>
+      <button class="chip" data-filter="best">Best Seller</button>
+      <button class="chip" data-filter="nashta">Breakfast</button>
+      <button class="chip" data-filter="delivery">Delivery Available</button>
+    </div>
+    <div class="menu-grid">
+      <a class="menu-item" href="#" data-tags="popular best"><span class="num">M-01</span><h4>7 Days 7 Dishes</h4><p>Daily specials to keep every visit exciting.</p></a>
+      <a class="menu-item" href="#" data-tags="popular best delivery"><span class="num">M-02</span><h4>Chicken Broast</h4><p>Crispy, juicy, served fresh.</p></a>
+      <a class="menu-item" href="#" data-tags="best spicy delivery"><span class="num">M-03</span><h4>Chicken Biryani</h4><p>Spicy rice, tender chicken, rich masala.</p></a>
+      <a class="menu-item" href="#" data-tags="family delivery"><span class="num">M-04</span><h4>Bar-B-Q</h4><p>Freshly grilled desi favorites.</p></a>
+      <a class="menu-item" href="#" data-tags="popular delivery"><span class="num">M-05</span><h4>Burgers &amp; Sandwiches</h4><p>Loaded fast food for quick cravings.</p></a>
+      <a class="menu-item" href="#" data-tags="popular family"><span class="num">M-06</span><h4>Pizza</h4><p>Hot, cheesy, perfect for sharing.</p></a>
+      <a class="menu-item" href="#" data-tags="delivery"><span class="num">M-07</span><h4>Shawarma &amp; Rolls</h4><p>Saucy, filling, easy anywhere.</p></a>
+      <a class="menu-item" href="#" data-tags="new"><span class="num">M-08</span><h4>Chinese Food</h4><p>Wok-style for Chinese food lovers.</p></a>
+      <a class="menu-item" href="#" data-tags="spicy family"><span class="num">M-09</span><h4>Pakistani Food</h4><p>Handi, haleem, mutton, naan &amp; salad.</p></a>
+      <a class="menu-item" href="#" data-tags="delivery"><span class="num">M-10</span><h4>Fish &amp; Soup</h4><p>Comfort food for cold Quetta evenings.</p></a>
+      <a class="menu-item" href="#" data-tags="nashta"><span class="num">M-11</span><h4>Nashta</h4><p>Fresh breakfast, every morning.</p></a>
+      <a class="menu-item" href="#" data-tags="spicy"><span class="num">M-12</span><h4>Handi</h4><p>Slow-cooked, rich, desi.</p></a>
+      <a class="menu-item" href="#" data-tags="new family"><span class="num">M-13</span><h4>Haleem</h4><p>Slow-simmered, hearty, warming.</p></a>
+      <a class="menu-item" href="#" data-tags="popular"><span class="num">M-14</span><h4>Loaded Fries</h4><p>Sauces + flavor, addictive.</p></a>
+      <a class="menu-item" href="#" data-tags="new"><span class="num">M-15</span><h4>Drinks &amp; Desserts</h4><p>Ice cream, fresh juices, cold drinks.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section id="offers" class="offers">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">07 / <span data-i18n="off.kicker">Deals &amp; Specials</span></span>
+      <h2 class="sec-title display" data-i18n="off.title">Deals made for every craving.</h2>
+      <p class="sec-sub" data-i18n="off.sub">Enjoy family deals, daily specials, lunch offers, nashta options, and app-exclusive discounts.</p>
+    </div>
+    <div class="offer-grid">
+      <div class="offer feat">
+        <span class="ribbon">App Only</span>
+        <div class="offer-img"><img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=800&q=80&auto=format&fit=crop" alt="Family broast deal" loading="lazy"/></div>
+        <div class="offer-body">
+          <h4 data-i18n="off.1.t">Family Broast Deal</h4>
+          <p data-i18n="off.1.d">6 pcs broast, large fries, 2 drinks, dipping sauces. Perfect for family dinners &amp; group orders.</p>
+          <div class="price">Rs. 2,290 <small>/ serves 4</small></div>
+          <a href="#order" class="btn">Claim in App</a>
+        </div>
+      </div>
+      <div class="offer">
+        <span class="ribbon">Lunch</span>
+        <div class="offer-img"><img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80&auto=format&fit=crop" alt="Biryani lunch deal" loading="lazy"/></div>
+        <div class="offer-body">
+          <h4 data-i18n="off.2.t">Biryani Lunch Deal</h4>
+          <p data-i18n="off.2.d">Full biryani plate, raita, cold drink — a satisfying meal for students &amp; office workers.</p>
+          <div class="price">Rs. 490 <small>/ 12–3 pm</small></div>
+          <a href="#order" class="btn">Order Deal</a>
+        </div>
+      </div>
+      <div class="offer">
+        <span class="ribbon">Weekend</span>
+        <div class="offer-img"><img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=800&q=80&auto=format&fit=crop" alt="BBQ weekend special" loading="lazy"/></div>
+        <div class="offer-body">
+          <h4 data-i18n="off.3.t">Weekend BBQ Special</h4>
+          <p data-i18n="off.3.d">Mixed grill, two naans, salad, raita — fresh weekend flavor for the whole family.</p>
+          <div class="price">Rs. 1,890 <small>/ Fri–Sun</small></div>
+          <a href="#order" class="btn">Pre-book</a>
+        </div>
+      </div>
+      <div class="offer">
+        <span class="ribbon">App Only</span>
+        <div class="offer-img"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800&q=80&auto=format&fit=crop" alt="App exclusive deal" loading="lazy"/></div>
+        <div class="offer-body">
+          <h4 data-i18n="off.4.t">App Exclusive</h4>
+          <p data-i18n="off.4.d">Download the Jaan Broast app and unlock flat 15% off your first three orders.</p>
+          <div class="price">-15% <small>/ first 3 orders</small></div>
+          <a href="#" class="btn">Get App</a>
+        </div>
+      </div>
+      <div class="offer">
+        <span class="ribbon">Morning</span>
+        <div class="offer-img"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&q=80&auto=format&fit=crop" alt="Nashta breakfast" loading="lazy"/></div>
+        <div class="offer-body">
+          <h4 data-i18n="off.5.t">Nashta Special</h4>
+          <p data-i18n="off.5.d">Halwa puri, chana, omelette, paratha, lassi — fresh breakfast, every morning.</p>
+          <div class="price">Rs. 290 <small>/ 7–11 am</small></div>
+          <a href="#order" class="btn">Order Nashta</a>
+        </div>
+      </div>
+      <div class="offer">
+        <span class="ribbon">Student</span>
+        <div class="offer-img"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&q=80&auto=format&fit=crop" alt="Student saver" loading="lazy"/></div>
+        <div class="offer-body">
+          <h4 data-i18n="off.6.t">Student Saver</h4>
+          <p data-i18n="off.6.d">Zinger burger, fries, drink — flash your student ID, get the deal.</p>
+          <div class="price">Rs. 390 <small>/ with ID</small></div>
+          <a href="#order" class="btn">Grab It</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">08 / <span data-i18n="rev.kicker">Loved in Quetta</span></span>
+      <h2 class="sec-title display" data-i18n="rev.title">Loved by foodies in Quetta.</h2>
+      <p class="sec-sub" data-i18n="rev.sub">Our customers love the taste, freshness, quantity, and variety of Jaan Broast &amp; Biryani.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review"><div class="stars">★★★★★</div><blockquote data-i18n="rev.1">“Arabic Chargha was tasty and highly recommended.”</blockquote><div class="byline"><span class="avatar">A</span>Ahmed · Foodpanda</div></div>
+      <div class="review dark"><div class="stars">★★★★★</div><blockquote data-i18n="rev.2">“Loaded fries were fresh, flavorful, and satisfying.”</blockquote><div class="byline"><span class="avatar" style="background:var(--saffron);color:var(--ink);">S</span>Sana · Google Review</div></div>
+      <div class="review"><div class="stars">★★★★★</div><blockquote data-i18n="rev.3">“Great taste, good quantity, and always served warm.”</blockquote><div class="byline"><span class="avatar">B</span>Bilal · Regular</div></div>
+      <div class="review"><div class="stars">★★★★★</div><blockquote data-i18n="rev.4">“Biryani, pulao, qeema — fast food items are loved by regulars.”</blockquote><div class="byline"><span class="avatar">F</span>Fatima · Family Order</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location" class="loc">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">09 / <span data-i18n="loc.kicker">Find Us</span></span>
+      <h2 class="sec-title display" data-i18n="loc.title">Visit us on Prince Road, Quetta.</h2>
+      <p class="sec-sub" data-i18n="loc.sub">Dine in, take away, or order delivery — we're open daily with a warm kitchen and a warmer table.</p>
+    </div>
+    <div class="loc-grid">
+      <div class="map" aria-label="Map placeholder">
+        <div class="pin"></div>
+        <div class="map-chip">[ MAP · Prince Rd, Quetta ]</div>
+      </div>
+      <div class="loc-info">
+        <div class="loc-row"><span class="label" data-i18n="loc.addr">Address</span><span class="value" data-i18n="loc.addr.v">Prince Road, Quetta</span></div>
+        <div class="loc-row"><span class="label" data-i18n="loc.hrs">Hours</span><span class="value" data-i18n="loc.hrs.v">Daily · 7:00 am – 1:00 am</span></div>
+        <div class="loc-row" style="border-bottom:none;">
+          <span class="label" data-i18n="loc.ph">Phone Lines</span>
+          <div class="phone-list" style="margin-top:8px;">
+            <a href="tel:0812669900">081-2669900</a>
+            <a href="tel:0812669988">081-2669988</a>
+            <a href="tel:0812839900">081-2839900</a>
+            <a href="tel:03111786550">03111-786-550</a>
+            <a href="tel:03262669988">0326-2669988</a>
+          </div>
+        </div>
+        <div class="loc-ctas">
+          <a href="#" class="btn btn-saffron" data-i18n="loc.dir">Get Directions</a>
+          <a href="tel:081-2669900" class="btn btn-primary" data-i18n="loc.call">Call Now</a>
+          <a href="https://wa.me/923111786550" class="btn btn-ghost" style="color:var(--cream);border-color:rgba(245,239,227,0.3);">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="brand-mark foot"><img src="logo.png" alt="Jaan Broast logo" /></span>
+        <h3>Jaan <span class="red">Broast</span> &amp; Biryani</h3>
+        <p data-i18n="foot.p">Crispy broast, spicy biryani, smoky BBQ, juicy burgers, cheesy pizzas, shawarma, Chinese, Pakistani food, and fresh nashta — all under one roof in Quetta.</p>
+      </div>
+      <div class="foot-col"><h5 data-i18n="foot.menu">Menu</h5><ul><li><a href="#menu">Broast</a></li><li><a href="#menu">Biryani</a></li><li><a href="#menu">BBQ</a></li><li><a href="#menu">Burgers &amp; Pizza</a></li><li><a href="#menu">Chinese &amp; Pakistani</a></li><li><a href="#menu">Nashta</a></li></ul></div>
+      <div class="foot-col"><h5 data-i18n="foot.order">Order</h5><ul><li><a href="#order">Order Online</a></li><li><a href="#">Download App</a></li><li><a href="#">Foodpanda</a></li><li><a href="https://wa.me/923111786550">WhatsApp Order</a></li><li><a href="tel:081-2669900">Call Now</a></li></ul></div>
+      <div class="foot-col"><h5 data-i18n="foot.visit">Visit</h5><ul><li>Prince Road, Quetta</li><li>Daily · 7am – 1am</li><li><a href="tel:0812669900">081-2669900</a></li><li><a href="tel:03111786550">03111-786-550</a></li><li><a href="#">Instagram · Facebook</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Jaan Broast &amp; Biryani · Prince Rd, Quetta</span>
+      <span>Made fresh · Served hot · Delivered fast</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Tweaks mount point -->
+<div id="tweaks-root"></div>
+
+<script>
+  // Menu filter
+  (function(){
+    var chips = document.querySelectorAll('#filters .chip');
+    var items = document.querySelectorAll('.menu-item');
+    chips.forEach(function(c){
+      c.addEventListener('click', function(){
+        chips.forEach(function(x){ x.classList.remove('active'); });
+        c.classList.add('active');
+        var f = c.dataset.filter;
+        items.forEach(function(it){
+          if (f === 'all') { it.style.display = ''; return; }
+          var tags = (it.dataset.tags || '').split(' ');
+          it.style.display = tags.indexOf(f) >= 0 ? '' : 'none';
+        });
+      });
+    });
+  })();
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if (id.length > 1) {
+        var t = document.querySelector(id);
+        if (t) {
+          e.preventDefault();
+          window.scrollTo({ top: t.offsetTop - 72, behavior: 'smooth' });
+          document.getElementById('drawer').classList.remove('open');
+        }
+      }
+    });
+  });
+</script>
+
+<!-- i18n dictionary -->
+<script>
+window.__I18N = {
+  en: {}, // English = inline defaults (no-op)
+  ur: {
+    "brand": "جان براسٹ",
+    "nav.menu": "مینو", "nav.deals": "ڈیلز", "nav.categories": "اقسام", "nav.favorites": "پسندیدہ", "nav.order": "آرڈر کریں",
+    "hero.status": "ابھی کھلا ہے · ڈائن اِن · ٹیک اَوے · ڈیلیوری",
+    "hero.h1a": "کوئٹہ کی پسندیدہ جگہ —", "hero.h1b": "براسٹ", "hero.h1c": "بریانی", "hero.h1d": "اور فاسٹ فوڈ",
+    "hero.lead": "کرسپی چکن براسٹ، مسالیدار بریانی، سموکی بار بی کیو، رسیلے برگرز، چیزی پیزا، شوارما، چائنیز، پاکستانی کھانے اور تازہ ناشتہ — تمام ذائقے ایک جگہ۔",
+    "hero.cta.order": "آرڈر کریں →", "hero.cta.menu": "مینو دیکھیں", "hero.cta.call": "کال کریں",
+    "trust.fresh": "تازہ ذائقہ", "trust.fast": "تیز ڈیلیوری", "trust.dine": "ڈائن اِن", "trust.take": "ٹیک اَوے", "trust.family": "فیملی فرینڈلی",
+    "stamp": "روزانہ ڈیلز",
+    "cat.kicker": "اقسام", "cat.title": "تمام کھانے ایک جگہ۔",
+    "cat.sub": "کرسپی براسٹ سے لے کر ذائقہ دار بریانی تک — ہر کیٹیگری بڑی بھوک کے لیے بنائی گئی ہے۔",
+    "cat.1.tag": "سگنیچر", "cat.1.name": "چکن براسٹ", "cat.1.desc": "باہر سے کرسپی، اندر سے رسیلا — کوئٹہ کی پہلی پسند۔",
+    "cat.2.tag": "بیسٹ سیلر", "cat.2.name": "چکن بریانی", "cat.2.desc": "خوشبودار، مسالیدار، لنچ اور ڈنر کے لیے بہترین۔",
+    "cat.3.tag": "فریش گرل", "cat.3.name": "بار بی کیو", "cat.3.desc": "سموکی، نرم، تازہ گرل — دیسی ذائقہ۔",
+    "cat.4.tag": "فوری کھانا", "cat.4.name": "برگرز اور زنگر", "cat.4.desc": "لوڈڈ، ساسی، بڑی بھوک کا حل۔",
+    "cat.5.tag": "شیئر سائز", "cat.5.name": "پیزا اور لوڈڈ فرائز", "cat.5.desc": "چیزی، گرم، فیملی نائٹس کے لیے۔",
+    "cat.6.tag": "رولز", "cat.6.name": "شوارما اور رولز", "cat.6.desc": "ساسی، بھرپور، کوئٹہ میں ہر جگہ آسان۔",
+    "cat.7.tag": "واک اسٹائل", "cat.7.name": "چائنیز فوڈ", "cat.7.desc": "چائنیز کھانے کے شوقین افراد کے لیے۔",
+    "cat.8.tag": "صبح", "cat.8.name": "ناشتہ", "cat.8.desc": "تازہ ناشتہ، ہر صبح جان براسٹ کے کچن سے۔",
+    "sig.kicker": "گاہکوں کی پسند", "sig.title": "ذائقہ جو واپس لے آئے۔",
+    "sig.sub": "تازہ، ذائقہ دار، ہر موڈ کے لیے — ہمارے کچن کے سب سے پسندیدہ کھانے دیکھیں۔",
+    "sig.1.name": "کرسپی چکن براسٹ", "sig.1.desc": "سنہرا، کرنچی، تازہ پیش کیا جاتا ہے — فرائز اور ساس کے ساتھ۔", "sig.1.meta": "سگنیچر · روپے 650",
+    "sig.2.name": "چکن بریانی", "sig.2.desc": "مسالیدار اور بھرپور ذائقہ — خوشبودار چاول، نرم چکن۔", "sig.2.meta": "بیسٹ سیلر · روپے 380",
+    "sig.3.name": "عربی چڑھا", "sig.3.desc": "نرم چکن اور تیز مسالوں کا دلکش امتزاج۔", "sig.3.meta": "ہائلی ریکمنڈڈ · روپے 1,250",
+    "sig.4.name": "لوڈڈ فرائز", "sig.4.desc": "کرسپی فرائز، ساس اور ذائقوں کے ساتھ لاجواب۔", "sig.4.meta": "کراؤڈ فیورٹ · روپے 420",
+    "sig.5.name": "چکن تکہ پیزا", "sig.5.desc": "گرم، چیزی اور دیسی چکن تکہ کے ذائقے سے سجا۔", "sig.5.meta": "پاپولر · روپے 950",
+    "sig.6.name": "بی بی کیو پلیٹر", "sig.6.desc": "تازہ گرل کی گئی اشیاء — فیملی ڈنرز کے لیے بہترین۔", "sig.6.meta": "فیملی سائز · روپے 1,850",
+    "why.kicker": "کیوں جان براسٹ", "why.title": "کوئٹہ جان براسٹ اور بریانی کو کیوں پسند کرتا ہے۔",
+    "why.sub": "تیز سروس، تازہ تیاری، اور ایک وسیع مینو — ہر بھوک کا جواب ایک جگہ۔",
+    "why.1.t": "وسیع مینو", "why.1.d": "براسٹ، بریانی، بار بی کیو، برگر، پیزا، شوارما، چائنیز، پاکستانی، مچھلی، حلیم، ہانڈی، سوپ اور مزید۔",
+    "why.2.t": "تیز آرڈرنگ", "why.2.d": "فون، ویب سائٹ، ایپ، واٹس ایپ یا اپنی پسندیدہ ڈیلیوری سروس سے آرڈر کریں۔",
+    "why.3.t": "تازہ اور گرم", "why.3.d": "ہر آرڈر تیز سروس، تازہ تیاری اور بھرپور مقدار کا یقین دلاتا ہے۔",
+    "why.4.t": "فیملی فرینڈلی", "why.4.d": "فیملیز، طلبہ، ورکرز اور کاروباری میٹنگز کے لیے موزوں۔",
+    "why.5.t": "ایپ کی سہولت", "why.5.d": "تیز آرڈرنگ، آسان ادائیگی، آرڈر ٹریکنگ اور ایپ ایکسکلوسیو ڈیلز۔",
+    "why.6.t": "مضبوط مقامی موجودگی", "why.6.d": "پرنس روڈ، کوئٹہ پر واقع — متعدد رابطہ نمبر اور فعال سوشل میڈیا۔",
+    "ord.kicker": "چند ٹیپس میں آرڈر", "ord.title": "بھوک لگی ہے؟ ابھی آرڈر کریں۔",
+    "ord.sub": "اپنا چینل منتخب کریں — ویب سائٹ، ایپ، واٹس ایپ یا فوڈ پانڈا۔",
+    "ord.1.t": "آن لائن آرڈر", "ord.1.d": "پورا مینو دیکھیں، کھانا حسبِ ذوق بنائیں، ایک منٹ سے کم میں چیک آؤٹ کریں۔", "ord.1.c": "آرڈر شروع کریں →",
+    "ord.2.t": "ایپ ڈاؤن لوڈ کریں", "ord.2.d": "لائیو ٹریکنگ، تیز ری آرڈرز اور ایپ ایکسکلوسیو ڈسکاؤنٹس۔", "ord.2.c": "ایپ حاصل کریں",
+    "ord.3.t": "واٹس ایپ پر آرڈر", "ord.3.d": "واٹس ایپ پر آرڈر بھیجیں — کیش آن ڈیلیوری۔", "ord.3.c": "واٹس ایپ پر چیٹ",
+    "ord.4.t": "کال پر آرڈر", "ord.4.d": "فون پر آرڈر کرنا چاہتے ہیں؟ ہمارا کچن لائن موجود ہے۔",
+    "mnu.kicker": "مینو پری ویو", "mnu.title": "جان کا مینو دیکھیں۔",
+    "mnu.sub": "دیسی کلاسکس سے فاسٹ فوڈ تک — ہر بھوک کے لیے۔", "mnu.cta": "پورا مینو →",
+    "off.kicker": "ڈیلز اور اسپیشلز", "off.title": "ہر بھوک کے لیے ڈیلز۔",
+    "off.sub": "فیملی ڈیلز، روزانہ اسپیشلز، لنچ آفرز، ناشتہ آپشنز اور ایپ ایکسکلوسیو ڈسکاؤنٹس۔",
+    "off.1.t": "فیملی براسٹ ڈیل", "off.1.d": "6 پیس براسٹ، بڑی فرائز، 2 ڈرنکس، ڈپنگ ساس۔ فیملی ڈنرز کے لیے بہترین۔",
+    "off.2.t": "بریانی لنچ ڈیل", "off.2.d": "مکمل بریانی پلیٹ، رائتہ، ٹھنڈا مشروب — طلبہ اور آفس ورکرز کے لیے۔",
+    "off.3.t": "ویک اینڈ بی بی کیو اسپیشل", "off.3.d": "مکس گرل، دو نان، سلاد، رائتہ — پوری فیملی کے لیے۔",
+    "off.4.t": "ایپ ایکسکلوسیو", "off.4.d": "جان براسٹ ایپ ڈاؤن لوڈ کریں اور پہلے تین آرڈرز پر 15% چھوٹ پائیں۔",
+    "off.5.t": "ناشتہ اسپیشل", "off.5.d": "حلوہ پوری، چنا، آملیٹ، پراٹھا، لسی — تازہ ناشتہ ہر صبح۔",
+    "off.6.t": "اسٹوڈنٹ سیور", "off.6.d": "زنگر برگر، فرائز، ڈرنک — اسٹوڈنٹ آئی ڈی دکھائیں اور ڈیل حاصل کریں۔",
+    "rev.kicker": "کوئٹہ کا پسندیدہ", "rev.title": "کوئٹہ کے فوڈیز کا پسندیدہ۔",
+    "rev.sub": "ہمارے گاہک ذائقے، تازگی، مقدار اور ورائٹی کو پسند کرتے ہیں۔",
+    "rev.1": "\"عربی چڑھا بہت لذیذ تھا اور انتہائی سفارش کے قابل ہے۔\"",
+    "rev.2": "\"لوڈڈ فرائز تازہ، ذائقہ دار اور مکمل طور پر مطمئن کرنے والے تھے۔\"",
+    "rev.3": "\"ذائقہ بہترین، مقدار اچھی، اور ہمیشہ گرم پیش کیا جاتا ہے۔\"",
+    "rev.4": "\"بریانی، پلاؤ، قیمہ — باقاعدہ گاہک فاسٹ فوڈ آئٹمز بھی پسند کرتے ہیں۔\"",
+    "loc.kicker": "ہم سے ملیں", "loc.title": "پرنس روڈ، کوئٹہ پر تشریف لائیں۔",
+    "loc.sub": "ڈائن اِن، ٹیک اَوے یا ڈیلیوری — ہم روزانہ کھلے ہیں۔",
+    "loc.addr": "پتہ", "loc.addr.v": "پرنس روڈ، کوئٹہ",
+    "loc.hrs": "اوقات", "loc.hrs.v": "روزانہ · صبح 7 بجے – رات 1 بجے",
+    "loc.ph": "فون لائنز", "loc.dir": "راستہ حاصل کریں", "loc.call": "ابھی کال کریں",
+    "foot.p": "کرسپی براسٹ، مسالیدار بریانی، سموکی بی بی کیو، رسیلے برگرز، چیزی پیزا، شوارما، چائنیز، پاکستانی اور تازہ ناشتہ — سب ایک چھت کے نیچے۔",
+    "foot.menu": "مینو", "foot.order": "آرڈر", "foot.visit": "ملاقات"
+  }
+};
+</script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+(function(){
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "palette": "charcoal",
+    "density": "regular",
+    "language": "en"
+  }/*EDITMODE-END*/;
+
+  const PALETTES = {
+    classic:  { cream: "#F5EFE3", cream2: "#EDE4D2", ink: "#151310", ink2: "#2B2620", red: "#C8321E", redDeep: "#8A1D10", saffron: "#F4B83A", mustard: "#E58B20", label: "Classic" },
+    midnight: { cream: "#F2EDE1", cream2: "#E6DEC9", ink: "#0E1118", ink2: "#22273A", red: "#D64545", redDeep: "#8C1F1F", saffron: "#E8C547", mustard: "#C99A36", label: "Midnight" },
+    jade:     { cream: "#F3EFE2", cream2: "#E4DDC7", ink: "#132018", ink2: "#24352B", red: "#0F5B3D", redDeep: "#073A26", saffron: "#F2C14E", mustard: "#D98E2A", label: "Jade" },
+    rose:     { cream: "#FBF1EC", cream2: "#F3E1D6", ink: "#1B1210", ink2: "#2F1F1B", red: "#D24669", redDeep: "#8C2942", saffron: "#F4B37A", mustard: "#D98A59", label: "Rose" },
+    charcoal: { cream: "#E9E6E0", cream2: "#D9D5CC", ink: "#111111", ink2: "#2A2A2A", red: "#E25822", redDeep: "#A23A10", saffron: "#EFD07A", mustard: "#C9984C", label: "Charcoal" }
+  };
+
+  function applyPalette(key){
+    const p = PALETTES[key] || PALETTES.classic;
+    const r = document.documentElement.style;
+    r.setProperty("--cream",    p.cream);
+    r.setProperty("--cream-2",  p.cream2);
+    r.setProperty("--ink",      p.ink);
+    r.setProperty("--ink-2",    p.ink2);
+    r.setProperty("--red",      p.red);
+    r.setProperty("--red-deep", p.redDeep);
+    r.setProperty("--saffron",  p.saffron);
+    r.setProperty("--mustard",  p.mustard);
+  }
+
+  function applyDensity(key){
+    document.documentElement.setAttribute("data-density", key);
+  }
+
+  function applyLanguage(lang){
+    document.documentElement.setAttribute("data-lang", lang);
+    document.documentElement.setAttribute("lang", lang);
+    const dict = (window.__I18N && window.__I18N[lang]) || {};
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+      const key = el.getAttribute("data-i18n");
+      if (!el.hasAttribute("data-i18n-en")) {
+        el.setAttribute("data-i18n-en", el.innerHTML);
+      }
+      if (lang === "en") {
+        el.innerHTML = el.getAttribute("data-i18n-en");
+      } else if (dict[key]) {
+        el.innerHTML = dict[key];
+      }
+    });
+  }
+
+  // Apply defaults on load
+  applyPalette(TWEAK_DEFAULTS.palette);
+  applyDensity(TWEAK_DEFAULTS.density);
+  applyLanguage(TWEAK_DEFAULTS.language);
+
+  function Swatch({ p }){
+    return (
+      <span style={{
+        display: "inline-flex", gap: 2, marginRight: 6,
+        verticalAlign: "middle", borderRadius: 4, overflow: "hidden",
+        border: "0.5px solid rgba(0,0,0,.1)"
+      }}>
+        <span style={{width:10,height:10,background:p.ink}}/>
+        <span style={{width:10,height:10,background:p.red}}/>
+        <span style={{width:10,height:10,background:p.saffron}}/>
+        <span style={{width:10,height:10,background:p.cream}}/>
+      </span>
+    );
+  }
+
+  function App(){
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+    React.useEffect(() => { applyPalette(t.palette); }, [t.palette]);
+    React.useEffect(() => { applyDensity(t.density); }, [t.density]);
+    React.useEffect(() => { applyLanguage(t.language); }, [t.language]);
+
+    return (
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Color Palette" />
+        {Object.keys(PALETTES).map(function(k){
+          const p = PALETTES[k];
+          const active = t.palette === k;
+          return (
+            <button key={k} type="button"
+              onClick={() => setTweak("palette", k)}
+              style={{
+                appearance: "none",
+                display: "flex", alignItems: "center", gap: 8,
+                width: "100%", height: 28, padding: "0 10px",
+                borderRadius: 7,
+                border: "0.5px solid " + (active ? "rgba(0,0,0,.35)" : "rgba(0,0,0,.1)"),
+                background: active ? "rgba(255,255,255,.85)" : "rgba(255,255,255,.5)",
+                font: "inherit", fontWeight: active ? 600 : 500,
+                cursor: "default", textAlign: "left"
+              }}>
+              <Swatch p={p} />
+              <span>{p.label}</span>
+            </button>
+          );
+        })}
+
+        <TweakSection label="Layout Density" />
+        <TweakRadio
+          label="Spacing"
+          value={t.density}
+          options={["compact", "regular", "comfy"]}
+          onChange={(v) => setTweak("density", v)}
+        />
+
+        <TweakSection label="Language" />
+        <TweakRadio
+          label="Display"
+          value={t.language}
+          options={[
+            { value: "en", label: "English" },
+            { value: "ur", label: "اردو" }
+          ]}
+          onChange={(v) => setTweak("language", v)}
+        />
+      </TweaksPanel>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("tweaks-root")).render(<App />);
+})();
+</script>
+
+</body>
+</html>

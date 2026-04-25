@@ -1,0 +1,105 @@
+{
+  "brand": {
+    "name": "Jaan Broast",
+    "tagline": "EST. QUETTA · PRINCE RD"
+  },
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "about": "About",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "order": "Order Now"
+  },
+  "hero": {
+    "status": "Open now · Dine-in · Takeaway · Delivery",
+    "h1a": "Quetta's favorite spot for",
+    "h1b": "Broast",
+    "h1c": "Biryani",
+    "h1d": "& Fast Food.",
+    "lead": "Crispy chicken broast, spicy biryani, smoky BBQ, juicy burgers, cheesy pizzas, shawarma, Chinese, Pakistani food, and fresh nashta — all your cravings in one place.",
+    "ctaOrder": "Order Now →",
+    "ctaMenu": "View Menu",
+    "ctaCall": "Call Now",
+    "stampBig": "7×7",
+    "stampSmall": "Daily Deals"
+  },
+  "trust": {
+    "fresh": "Fresh Taste",
+    "fast": "Fast Delivery",
+    "dine": "Dine-In",
+    "take": "Takeaway",
+    "family": "Family Friendly"
+  },
+  "categories": {
+    "kicker": "Categories",
+    "title": "All your cravings, one place.",
+    "sub": "From crispy broast to flavorful biryani, every category on our menu is built for real appetite — choose your craving and order in two taps."
+  },
+  "signature": {
+    "kicker": "Customer Favorites",
+    "title": "Taste that makes you come back.",
+    "sub": "Fresh, flavorful, and made for every mood — explore the most-loved dishes from our kitchen."
+  },
+  "why": {
+    "kicker": "Why Jaan Broast",
+    "title": "Why Quetta loves Jaan Broast & Biryani.",
+    "sub": "Built around fast service, fresh preparation, and a menu wide enough to feed every craving in one stop."
+  },
+  "order": {
+    "kicker": "Order in a Few Taps",
+    "title": "Hungry? Order now.",
+    "sub": "Pick your channel — website, app, WhatsApp, or Foodpanda. Hot food, your way."
+  },
+  "menuPreview": {
+    "kicker": "Menu Preview",
+    "title": "Explore the Jaan menu.",
+    "sub": "From desi classics to fast-food favorites, our menu is made for every craving.",
+    "cta": "Full Menu →",
+    "filters": {
+      "all": "All",
+      "popular": "Popular",
+      "spicy": "Spicy",
+      "family": "Family Deal",
+      "new": "New Arrival",
+      "best": "Best Seller",
+      "nashta": "Breakfast",
+      "delivery": "Delivery Available"
+    }
+  },
+  "offers": {
+    "kicker": "Deals & Specials",
+    "title": "Deals made for every craving.",
+    "sub": "Enjoy family deals, daily specials, lunch offers, nashta options, and app-exclusive discounts."
+  },
+  "reviews": {
+    "kicker": "Loved in Quetta",
+    "title": "Loved by foodies in Quetta.",
+    "sub": "Our customers love the taste, freshness, quantity, and variety of Jaan Broast & Biryani."
+  },
+  "location": {
+    "kicker": "Find Us",
+    "title": "Visit us on Prince Road, Quetta.",
+    "sub": "Dine in, take away, or order delivery — we're open daily with a warm kitchen and a warmer table.",
+    "address": "Address",
+    "hours": "Hours",
+    "phones": "Phone Lines",
+    "directions": "Get Directions",
+    "call": "Call Now",
+    "whatsapp": "WhatsApp"
+  },
+  "footer": {
+    "description": "Crispy broast, spicy biryani, smoky BBQ, juicy burgers, cheesy pizzas, shawarma, Chinese, Pakistani food, and fresh nashta — all under one roof in Quetta.",
+    "menu": "Menu",
+    "order": "Order",
+    "visit": "Visit",
+    "rights": "© 2026 Jaan Broast & Biryani · Prince Rd, Quetta",
+    "strap": "Made fresh · Served hot · Delivered fast"
+  },
+  "meta": {
+    "title": "Jaan Broast & Biryani — Quetta's Favorite Spot for Broast, Biryani & Fast Food",
+    "description": "Crispy chicken broast, spicy biryani, smoky BBQ, burgers, pizza, shawarma, Chinese and fresh nashta in Quetta. Dine-in, takeaway, and fast delivery on Prince Road.",
+    "keywords": "Jaan Broast, Quetta restaurant, chicken broast, biryani, BBQ, fast food, Prince Road, Pakistani food, nashta, food delivery Quetta"
+  }
+}
