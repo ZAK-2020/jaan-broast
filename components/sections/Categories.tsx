@@ -49,12 +49,12 @@ export async function Categories() {
                 key={c.id}
                 href="#menu"
                 className={cn(
-                  'relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-[20px] border p-[18px] transition-transform duration-200 hover:-translate-y-1',
+                  'relative flex aspect-[4/5] flex-col gap-2 overflow-hidden rounded-[20px] border p-3 transition-transform duration-200 hover:-translate-y-1 sm:gap-3 sm:p-[18px]',
                   v.card,
                 )}
               >
                 <Tag className={v.tag}>{c.tag[locale]}</Tag>
-                <div className="absolute inset-x-[8%] inset-y-[28%] overflow-hidden rounded-2xl bg-ink">
+                <div className="relative w-full flex-1 overflow-hidden rounded-2xl bg-ink">
                   <Image
                     src={c.image}
                     alt={c.alt}
@@ -63,9 +63,18 @@ export async function Categories() {
                     className="object-cover"
                   />
                 </div>
-                <div className="relative z-10">
-                  <h3 className="font-display m-0 text-xl leading-none">{c.name[locale]}</h3>
-                  <p className={cn('mt-1 text-xs leading-tight', v.desc)}>{c.desc[locale]}</p>
+                <div className="relative z-10 min-h-0">
+                  <h3 className="font-display m-0 text-base leading-tight sm:text-xl sm:leading-none">
+                    {c.name[locale]}
+                  </h3>
+                  <p
+                    className={cn(
+                      'mt-1 line-clamp-2 text-[10px] leading-tight sm:text-xs',
+                      v.desc,
+                    )}
+                  >
+                    {c.desc[locale]}
+                  </p>
                 </div>
               </a>
             );

@@ -19,7 +19,7 @@ export async function Hero() {
               <span>{t('status')}</span>
             </div>
 
-            <h1 className="font-display m-0 mb-5 text-[clamp(44px,9vw,112px)]">
+            <h1 className="font-display m-0 mb-5 text-[clamp(32px,9vw,112px)] [overflow-wrap:break-word]">
               {t('h1a')} <span className="text-red">{t('h1b')}</span>,{' '}
               <span className="relative inline-block isolate">
                 {t('h1c')}
