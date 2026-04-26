@@ -27,9 +27,9 @@ export async function Header() {
                 className="h-full w-full object-contain drop-shadow-[0_2px_6px_rgba(21,19,16,0.18)]"
               />
             </span>
-            <span className="font-display text-[20px] tracking-[-0.02em]">
-              <span>{tBrand('name')}</span>
-              <small className="font-mono-label keep-ltr text-ink-2 mt-0.5 block text-[9px] tracking-[0.22em] font-normal normal-case">
+            <span className="font-display hidden text-[20px] tracking-[-0.02em] sm:block">
+              <span className="whitespace-nowrap">{tBrand('name')}</span>
+              <small className="font-mono-label keep-ltr text-ink-2 mt-0.5 block whitespace-nowrap text-[9px] tracking-[0.22em] font-normal normal-case">
                 {tBrand('tagline')}
               </small>
             </span>
